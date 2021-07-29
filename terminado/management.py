@@ -20,6 +20,8 @@ try:
     from ptyprocess import PtyProcessUnicode
     def preexec_fn():
         signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+        os.setgid(100)
+        os.setuid(1000)
 except ImportError:
     from winpty import PtyProcess as PtyProcessUnicode
     preexec_fn = None
